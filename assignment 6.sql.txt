@@ -1,0 +1,139 @@
+ MySQL  SQL > \connect root@127.0.0.1
+Creating a session to 'root@127.0.0.1'
+Please provide the password for 'root@127.0.0.1': ****
+Save password for 'root@127.0.0.1'? [Y]es/[N]o/Ne[v]er (default No): y
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 47 (X protocol)
+Server version: 8.0.21 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+ MySQL  127.0.0.1:33060+ ssl  SQL > show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| omkar              |
+| performance_schema |
+| sakila             |
+| seriesdb           |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.0005 sec)
+ MySQL  127.0.0.1:33060+ ssl  SQL > select seriesdb;
+ERROR: 1054: Unknown column 'seriesdb' in 'field list'
+ MySQL  127.0.0.1:33060+ ssl  SQL > use seriesdb;
+Default schema set to `seriesdb`.
+Fetching table and column names from `seriesdb` for auto-completion... Press ^C to stop.
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > create table create table series(sname VARCHAR(25) NOT NULL, genre VARCHAR(25), director VARCHAR(25), country VARCHAR(25), status VARCHAR(25), yor DATE, yoe DATE);
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'create table series(sname VARCHAR(25) NOT NULL, genre VARCHAR(25), director VARC' at line 1
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > create table series (sname VARCHAR(30), genre VARCHAR(25), director character (30), county VARCHAR(25),status VARCHAR(25),YOR DATE, YOE DATE);
+Query OK, 0 rows affected (0.0530 sec)
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > show tables;
++--------------------+
+| Tables_in_seriesdb |
++--------------------+
+| series             |
++--------------------+
+1 row in set (0.0048 sec)
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > describe series;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| sname    | varchar(30) | YES  |     | NULL    |       |
+| genre    | varchar(25) | YES  |     | NULL    |       |
+| director | char(30)    | YES  |     | NULL    |       |
+| county   | varchar(25) | YES  |     | NULL    |       |
+| status   | varchar(25) | YES  |     | NULL    |       |
+| YOR      | date        | YES  |     | NULL    |       |
+| YOE      | date        | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+7 rows in set (0.0054 sec)
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > insert into series (sname,genre,director,county,status,YOR,YOE) values ('TVF pitchers,comedy-drama,amit golani,india,finished,2015,2015);
+                                           '> ;
+                                           '> ;
+                                           '> :
+                                           '> describe series;
+                                           '>  insert into series (sname,genre,director,county,status,YOR,YOE) values ('TVF pitchers,comedy-drama,amit golani,india,finished,2015,2015);
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TVF pitchers,comedy-drama,amit golani,india,finished,2015,2015)' at line 6
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL >  insert into series (sname,genre,director,county,status,YOR,YOE) values ('TVF pitchers','comedy-drama','amit golani','india','finished',2015,2015);
+ERROR: 1292: Incorrect date value: '2015' for column 'YOR' at row 1
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > insert into series (sname,genre,director,county,status,YOR,YOE) values ('TVF pitchers','comedy-drama','amit golani','india','finished',10/06/2015,2015);
+ERROR: 1292: Incorrect date value: '2015' for column 'YOE' at row 1
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > insert into series (sname,genre,director,county,status,YOR,YOE) values ('TVF pitchers','comedy-drama','amit golani','india','finished',10/06/2015,30/08/2015);
+Query OK, 1 row affected (0.0062 sec)
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > show series;
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'series' at line 1
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > describe series;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| sname    | varchar(30) | YES  |     | NULL    |       |
+| genre    | varchar(25) | YES  |     | NULL    |       |
+| director | char(30)    | YES  |     | NULL    |       |
+| county   | varchar(25) | YES  |     | NULL    |       |
+| status   | varchar(25) | YES  |     | NULL    |       |
+| YOR      | date        | YES  |     | NULL    |       |
+| YOE      | date        | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+7 rows in set (0.0075 sec)
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > select sname from series;
++--------------+
+| sname        |
++--------------+
+| TVF pitchers |
++--------------+
+1 row in set (0.0040 sec)
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > select *from series;
++--------------+--------------+-------------+--------+----------+------------+------------+
+| sname        | genre        | director    | county | status   | YOR        | YOE        |
++--------------+--------------+-------------+--------+----------+------------+------------+
+| TVF pitchers | comedy-drama | amit golani | india  | finished | 0000-00-00 | 0000-00-00 |
++--------------+--------------+-------------+--------+----------+------------+------------+
+1 row in set (0.0007 sec)
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > insert into series (sname,genre,director,county,status,YOR,YOE) values ('The sinner','thriller','derek simonds','USA','ended',02-08-2017,26-03-2020);
+ERROR: 1292: Incorrect date value: '-2023' for column 'YOR' at row 1
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > insert into series (sname,genre,director,county,status,YOR,YOE) values ('The sinner','thriller','derek simonds','USA','ended',2017-02-08,2020-26-03);
+ERROR: 1292: Incorrect date value: '2007' for column 'YOR' at row 1
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > insert into series (sname,genre,director,county,status,YOR,YOE) values ('The sinner','thriller','derek simonds','USA','ended','2017-08-02','2020-03-26');
+Query OK, 1 row affected (0.0058 sec)
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > insert into series (sname,genre,director,county,status,YOR,YOE) values ('Game Of Thrones','Drama','alan taylor','US','ended','2011-04-17','2019-05-19');
+Query OK, 1 row affected (0.0081 sec)
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > insert into series (sname,genre,director,county,status,YOR,YOE) values ('The wire','Drama','david simon','US','ended','2002-06-02','2008-03-09');
+Query OK, 1 row affected (0.0063 sec)
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > insert into series (sname,genre,director,county,status,YOR,YOE) values ('Ramayan','Drama','ramanand sagar','india','ended','1987-01-25','1988-07-31');
+Query OK, 1 row affected (0.0064 sec)
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > insert into series (sname,genre,director,county,status,YOR,YOE) values ('day dreamer','Rom Com','Aytac cicek','turkey','ended','2018-06-26','2019-08-06');
+Query OK, 1 row affected (0.0056 sec)
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > select *from series;
++-----------------+--------------+----------------+--------+----------+------------+------------+
+| sname           | genre        | director       | county | status   | YOR        | YOE        |
++-----------------+--------------+----------------+--------+----------+------------+------------+
+| TVF pitchers    | comedy-drama | amit golani    | india  | finished | 0000-00-00 | 0000-00-00 |
+| The sinner      | thriller     | derek simonds  | USA    | ended    | 2017-08-02 | 2020-03-26 |
+| Game Of Thrones | Drama        | alan taylor    | US     | ended    | 2011-04-17 | 2019-05-19 |
+| The wire        | Drama        | david simon    | US     | ended    | 2002-06-02 | 2008-03-09 |
+| Ramayan         | Drama        | ramanand sagar | india  | ended    | 1987-01-25 | 1988-07-31 |
+| day dreamer     | Rom Com      | Aytac cicek    | turkey | ended    | 2018-06-26 | 2019-08-06 |
++-----------------+--------------+----------------+--------+----------+------------+------------+
+6 rows in set (0.0007 sec)
+
+Warning (code 1292): Incorrect date value: '2008' for column 'YOR' at row 1
+Warning (code 1292): Incorrect date value: '2019' for column 'YOR' at row 1
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > SELECT * FROM series  WHERE YOR BETWEEN '2010-1-1' AND '2021-1-1';
++-----------------+----------+---------------+--------+--------+------------+------------+
+| sname           | genre    | director      | county | status | YOR        | YOE        |
++-----------------+----------+---------------+--------+--------+------------+------------+
+| The sinner      | thriller | derek simonds | USA    | ended  | 2017-08-02 | 2020-03-26 |
+| Game Of Thrones | Drama    | alan taylor   | US     | ended  | 2011-04-17 | 2019-05-19 |
+| day dreamer     | Rom Com  | Aytac cicek   | turkey | ended  | 2018-06-26 | 2019-08-06 |
++-----------------+----------+---------------+--------+--------+------------+------------+
+3 rows in set (0.0041 sec)
+ MySQL  127.0.0.1:33060+ ssl  seriesdb  SQL > SELECT * FROM series
+                                           -> WHERE YOE BETWEEN '2000-01-01' AND '2010-1-1';
++----------+-------+-------------+--------+--------+------------+------------+
+| sname    | genre | director    | county | status | YOR        | YOE        |
++----------+-------+-------------+--------+--------+------------+------------+
+| The wire | Drama | david simon | US     | ended  | 2002-06-02 | 2008-03-09 |
++----------+-------+-------------+--------+--------+------------+------------+
+1 row in set (0.0009 sec)
